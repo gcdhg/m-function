@@ -1,24 +1,22 @@
-module main (CLK_50MHZ, out_fun);
+module main (CLK_50MHZ, out_fun, data);
 
 parameter fase_param = 4'b0101;
 parameter type_param = 4'b1101;
 
 input CLK_50MHZ;
-output out_fun;
 
+output out_fun;
+output [7:0] data;
+
+wire [3:0] fase_new;
 wire control_wire,
-//     TRANSMITION_START,
      out;
 
 reg [3:0] fase_reg = fase_param;
-wire [3:0] fase_new;
-reg out_reg;
-reg [4:0] cnt;
-//signal_control f1(.signal(control_wire),
-//                  .control(TRANSMITION_START)
-//                  );
+reg [5:0] cnt = 0;
 
-mfun f2(.clk(CLK_50MHZ),
+
+mfun f1(.clk(CLK_50MHZ),
         .fase(fase_reg),
         .type_f(type_param),
         .fase_new(fase_new),
@@ -26,14 +24,18 @@ mfun f2(.clk(CLK_50MHZ),
         .control(control_wire)
         );
 
-assign out_fun = out_reg;
+dec f2(.clk(control_wire),
+       .signal(out),
+       .data(data)
+       );
+
+assign out_fun = out;
 
 always @ (posedge CLK_50MHZ) begin
   if (control_wire) begin
       if (cnt != 32) begin
         cnt <= cnt + 1;
         fase_reg <= fase_new;
-        out_reg <= out;
       end
       else begin
         cnt <= 0;

@@ -7,7 +7,7 @@ reg signal_now,
     signal_stable,
     signal_prev;
 
-assign control = ~signal_now $$ signal_prev;
+assign control = ~signal_now && signal_prev;
 
 
 always @ ( siganal ) begin

@@ -1,6 +1,7 @@
 module mfun (clk, fase, type_f, fase_new, sum, control);
 
-parameter delay = 20;
+parameter delay = 2;
+parameter count = 4;
 
 input clk;
 input [3:0] fase;
@@ -21,11 +22,16 @@ always @ ( posedge clk ) begin
     cnt <= 0;
     fase_new <= {sum_reg , fase[3:1]};
     control_reg <= 1'b1;
-  end 
+  end
   else begin
     cnt <= cnt + 1;
-    control_reg <= 1'b0;  
-    sum_reg <= fase[0] ^ type_f[0] + fase[1] ^ type_f[1] + fase[2] ^ type_f[2] + fase[3] ^ type_f[3];
+    control_reg <= 1'b0;
+//    if (cnt < count) begin
+//      if (type_f[cnt]) begin
+//        sum_reg <= sum_reg ^ fase[cnt];
+//      end
+       sum_reg <= (fase[0] & type_f[0]) ^ (fase[1] & type_f[1]) ^ (fase[2] & type_f[2]) ^ (fase[3] & type_f[3]);
+//    end
   end
 end
 
