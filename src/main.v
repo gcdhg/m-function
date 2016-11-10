@@ -1,4 +1,4 @@
-module main (CLK_50MHZ, out_fun, data);
+module main (CLK_50MHZ, out_fun, data, buff_wr, sclk);
 
 parameter fase_param = 4'b0101;
 parameter type_param = 4'b1101;
@@ -7,6 +7,8 @@ input CLK_50MHZ;
 
 output out_fun;
 output [7:0] data;
+output [30:0] buff_wr;
+output sclk;
 
 wire [3:0] fase_new;
 wire control_wire,
@@ -14,7 +16,6 @@ wire control_wire,
 
 reg [3:0] fase_reg = fase_param;
 reg [5:0] cnt = 0;
-
 
 mfun f1(.clk(CLK_50MHZ),
         .fase(fase_reg),
@@ -26,10 +27,12 @@ mfun f1(.clk(CLK_50MHZ),
 
 dec f2(.clk(control_wire),
        .signal(out),
-       .data(data)
+       .data(data),
+       .buff_wr(buff_wr)
        );
 
 assign out_fun = out;
+assign sclk = control_wire;
 
 always @ (posedge CLK_50MHZ) begin
   if (control_wire) begin

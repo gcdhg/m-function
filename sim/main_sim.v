@@ -31,22 +31,22 @@ always begin
 end
 
 wire [7:0] data;
-wire clk_w;
+wire signal;
+wire [30:0] buff_wr;
+wire contrl;
+reg [7:0] data_r = 0;
 
 main f1(.CLK_50MHZ(clk),
-        .out_fun(clk_w),
-        .data(data)
+        .out_fun(signal),
+        .data(data),
+        .buff_wr(buff_wr),
+        .sclk(contrl)
         );
 
-always @(clk_w) begin
-    buff <= {buff[29:0], clk_w};
-    cnt <= cnt + 1;
-    if (cnt == 31) begin
-        $display(buff);
-        $stop;
-    end
-    $display("current signal");
-    $display(clk_w);
+always @(posedge contrl) begin
+    buff <= {buff[29:0], signal};
+    $display("------------------------");
+    $display(" curent signal = %b \n data decoded = %d \n buff = %b", signal, data, buff);
 end
 
 endmodule
