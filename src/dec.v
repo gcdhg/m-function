@@ -3,8 +3,9 @@ module dec (clk,
             data,
             buff_wr);
 
-parameter template = 31'b1010000110010011111011100010101; // param for testing
-//parameter template = 31'b0110100011010001101000110100011; //param for main
+parameter template = 31'b0011001001111101110001010110100; // for test and poduction
+//parameter template = 31'b1010000110010011111011100010101;
+//parameter template = 31'b1010000110010011111011100010101;
 
 input clk;
 input signal;
@@ -19,7 +20,7 @@ assign buff_wr = buff;
 assign data = ((~template[0] ^ buff[0]) ? 1 : (-1)) +
             ((~template[1] ^ buff[1]) ? 1 : (-1)) +
             ((~template[3] ^ buff[3]) ? 1 : (-1)) +
-	  	      ((~template[2] ^ buff[2]) ? 1 : (-1)) +
+            ((~template[2] ^ buff[2]) ? 1 : (-1)) +
             ((~template[4] ^ buff[4]) ? 1 : (-1)) +
             ((~template[5] ^ buff[5]) ? 1 : (-1)) +
             ((~template[6] ^ buff[6]) ? 1 : (-1)) +
@@ -51,6 +52,7 @@ assign data = ((~template[0] ^ buff[0]) ? 1 : (-1)) +
 
 always @ ( posedge clk ) begin
     buff <= {buff[29:0], signal};
+//      buff <= {signal, buff[30:1]}; //test_def
 end
 
 endmodule // dec

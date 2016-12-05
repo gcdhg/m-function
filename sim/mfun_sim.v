@@ -29,16 +29,16 @@ always begin
     #5 clk <= ~clk;
 end
 
-wire [3:0] fase_new;
+wire [4:0] fase_new;
 wire sum;
-wire control;
-reg [3:0] fase = 4'b0101;
+reg [4:0] fase = 4'b10101; // 0101
 reg [4:0] cnt = 0;
 reg [30:0] buff = 0;
 
-mfun f1(.clk(clk), .fase(fase), .type_f(4'b0101), .fase_new(fase_new), .sum(sum), .control(control));
+mfun f1(.clk(clk), .fase(fase), .type_f(5'b11101), .fase_new(fase_new), .sum(sum));
+//mfun (clk, fase, type_f, fase_new, sum);
 
-always @(posedge control) begin
+always @(posedge clk) begin
     fase <= fase_new;
     cnt <= cnt + 1;
     buff <= {buff[29:0], sum};

@@ -1,9 +1,12 @@
-module mfun (clk, fase, type_f, fase_new, sum);
+module mfun (fase,
+             type_f,
+             fase_new,
+             sum
+             );
 
 parameter delay = 2;
 parameter count = 4;
 
-input clk;
 input [4:0] fase;
 input [4:0] type_f;
 output [4:0] fase_new;
