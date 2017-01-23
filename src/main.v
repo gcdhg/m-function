@@ -1,6 +1,6 @@
-module main (CLK_50MHZ, 
-             out_fun, 
-             data, 
+module main (CLK_50MHZ,
+             out_fun,
+             data,
              buff_wr
              );
 
@@ -25,12 +25,23 @@ mfun f1(.fase(fase_reg),
         .sum(signal)
         );
 
-dec f2(.clk(CLK_50MHZ),
-       .signal(signal),
-       .data(data),
-       .buff_wr(buff_wr)
-       );
+dec_bpsk f2(0011001100111100110000000011110)(.clk(CLK_50MHZ),
+            .signal(signal),
+            .data(data),
+            .buff_wr(buff_wr)
+            );
 
+dec_bpsk f3(0011001100111100110000000011110)(.clk(CLK_50MHZ),
+            .signal(signal),
+            .data(data),
+            .buff_wr(buff_wr)
+            );
+
+dec_bpsk f4(.clk(CLK_50MHZ),
+            .signal(signal),
+            .data(data),
+            .buff_wr(buff_wr)
+            );
 assign out_fun = signal;
 
 always @ (posedge CLK_50MHZ) begin

@@ -8,7 +8,7 @@ for i in range(0,32):
     pass
 
 def mfun(fase_f, type_f):
-    for i in range(0, 30):
-
+    for i in range(0, 32):
+        
         pass
     return mfun

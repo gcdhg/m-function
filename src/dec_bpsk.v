@@ -1,9 +1,9 @@
-module dec (clk,
+module dec_bpsk #(parameter template = 31'b0011001001111101110001010110100) (clk,
             signal,
             data,
             buff_wr);
 
-parameter template = 31'b0011001001111101110001010110100; // for test and poduction
+// parameter template = 31'b0011001001111101110001010110100; // for test and poduction
 //parameter template = 31'b1010000110010011111011100010101;
 //parameter template = 31'b1010000110010011111011100010101;
 
