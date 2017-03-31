@@ -1,25 +1,4 @@
 `timescale 1ns / 1ps
-//////////////////////////////////////////////////////////////////////////////////
-// Company:
-// Engineer:
-//
-// Create Date: 29.09.2016 13:46:24
-// Design Name:
-// Module Name: mfun_sim
-// Project Name:
-// Target Devices:
-// Tool Versions:
-// Description:
-//
-// Dependencies:
-//
-// Revision:
-// Revision 0.01 - File Created
-// Additional Comments:
-//
-//////////////////////////////////////////////////////////////////////////////////
-
-
 module mfun_sim(
     );
 
@@ -35,7 +14,7 @@ reg [4:0] fase = 4'b10101; // 0101
 reg [4:0] cnt = 0;
 reg [30:0] buff = 0;
 
-mfun f1(.clk(clk), .fase(fase), .type_f(5'b11101), .fase_new(fase_new), .sum(sum));
+mfun f1(.fase(fase), .type_f(5'b11101), .fase_new(fase_new), .sum(sum));
 //mfun (clk, fase, type_f, fase_new, sum);
 
 always @(posedge clk) begin

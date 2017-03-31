@@ -1,9 +1,8 @@
 `timescale 1ns / 1ps
 module dec_sim ();
 
-//parameter template = 31'b1010100011101111100100110000101;
-parameter template = 31'b0011001001111101110001010110100; // test data
-//parameter template = 31'b0010110101000111011111001001100;
+parameter template = 31'b0011001001111101110001010110100; 
+
 reg clk = 0;
 reg signal = 0;
 
@@ -26,25 +25,7 @@ dec f1(.clk(clk),
 
 always @(posedge clk) begin
     signal <= template_copy[0];
-    template_copy <= {template_copy[0], template_copy[30:1]};
-//    case(cnt)
-//        5'd30: begin
-//            cnt <= 0;
-//            signal <= template[cnt];
-//        end
-//        default: begin
-//            signal <= template[cnt];
-//            cnt <= cnt + 1;
-//        end
-//    endcase
-//    if (cnt == 31) begin
-//        cnt <= 1;
-//        signal <= template[0];
-//    end
-//    else begin
-//        cnt <= cnt + 1;
-//        signal <= template[cnt];
-//    end
+    template_copy <= {template_copy[0], template_copy[30:1]};   `                                                                                           `                                                               
 end
 
 always @(posedge clk) begin

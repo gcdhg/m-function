@@ -1,24 +1,15 @@
-module modulator (clk,
+module modulator (control,
                   signal,
                   sinwt,
                   coswt
                   );
 
-input clk;
+input control;
 input signal;
 output reg sinwt;
 output reg coswt;
 
-reg cnt = 0;
+assign signal = (control) ? sinwt : coswt;
 
-always @ ( posedge clk ) begin
-  cnt <= ~cnt;
-  if (~cnt) begin
-    sinwt <= signal;
-  end
-  else begin
-    coswt <= signal;
-  end
-end
 
 endmodule // modulator
